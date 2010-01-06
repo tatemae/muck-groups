@@ -43,26 +43,6 @@ en:
       login_or_join: <span class="link-button">{{login_link}}</span> or <span class="link-button">{{join_link}}</span> before joining this group
       visiblity: Visibility
       tag_list: Group Tags
-      invite_message: |-
-        Hello {{name}},
-        
-        {{message}}
-        
-        Visit the group '{{group}}':
-        {{group_url}}
-        
-        Join the group '{{group}}':
-        {{membership_url}}
-        
-        View {{inviter_name}}'s profile:
-        {{inviter_profile_url}} 
-        
-        Please feel free to explore our social network, courses, and website. If we can provide 
-        you any assistance, please contact one of our staff by following this link: 
-        {{staff_page_url}} .
-        
-        Kind Regards,
-        {{emailer_name}}
       news: News
       description: Description
       permissions: Requires Permission to Join

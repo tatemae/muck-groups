@@ -5,8 +5,29 @@ Add groups to your muck powered site
   sudo gem install muck-groups
 
 === Add configuration
-  
-=== Added models
+
+Add the following to environment.rb
+  config.gem "authlogic"
+  config.gem "searchlogic"
+  config.gem "will_paginate"
+  config.gem "bcrypt-ruby", :lib => "bcrypt"
+  config.gem "paperclip"
+  config.gem "acts-as-taggable-on"
+  config.gem "awesome_nested_set"
+  config.gem "sanitize"
+  config.gem "geokit"
+  config.gem "aasm"
+  config.gem 'muck-engine', :lib => 'muck_engine'
+  config.gem 'muck-users', :lib => 'muck_users'
+  config.gem 'muck-profiles', :lib => 'muck_profiles'
+  config.gem "muck-solr", :lib => 'acts_as_solr'
+  config.gem "muck-comments", :lib => 'muck_comments'
+
+Be sure that 'from_email_name' is configured in global_config.yml
+
+  from_email_name: 'The guys at my great site'
+
+=== Add models
 You will need to create several models in your application to get groups to work.  This allows you to add an desired functionality.
 
   class Group < ActiveRecord::Base

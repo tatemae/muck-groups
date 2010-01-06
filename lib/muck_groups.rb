@@ -1,3 +1,5 @@
+require 'aasm'
+
 ActionController::Base.send :helper, MuckGroupsHelper
 
 ActiveRecord::Base.class_eval { include ActiveRecord::Acts::MuckGroup }

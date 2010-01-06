@@ -41,7 +41,7 @@ Gem::Specification.new do |s|
      "app/views/groups/_pending_request.html.erb",
      "app/views/groups/_shared_entry.html.erb",
      "app/views/groups/_shared_uploads.html.erb",
-     "app/views/muck_group_mailer/invite.html.erb",
+     "app/views/muck_group_mailer/invite.plain.html.erb",
      "config/muck_groups_routes.rb",
      "db/migrate/20091112160332_create_groups.rb",
      "lib/active_record/acts/muck_group.rb",

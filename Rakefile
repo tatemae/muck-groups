@@ -13,11 +13,13 @@ begin
     gem.add_development_dependency "shoulda"
     gem.add_dependency "sanitize"
     gem.add_dependency "aasm"
+    gem.add_dependency "geokit"
     gem.add_dependency "friendly_id"
     gem.add_dependency "muck-engine"
     gem.add_dependency "muck-users"
     gem.add_dependency "muck-profiles"
     gem.add_dependency "muck-comments"
+    gem.add_dependency "muck-solr"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new

@@ -24,8 +24,11 @@ Rails::Initializer.run do |config|
   config.gem "awesome_nested_set"
   config.gem "sanitize"
   config.gem "geokit"
+  config.gem "aasm"
   config.gem 'muck-engine', :lib => 'muck_engine'
   config.gem 'muck-users', :lib => 'muck_users'
   config.gem 'muck-profiles', :lib => 'muck_profiles'
+  config.gem "muck-solr", :lib => 'acts_as_solr'
+  config.gem "muck-comments", :lib => 'muck_comments'
   config.plugin_locators << TestGemLocator
 end
