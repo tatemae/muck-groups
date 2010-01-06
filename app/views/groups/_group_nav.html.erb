@@ -1,0 +1,11 @@
+<div id="group_nav">
+  <%= link_to translate('muck.groups.main'), group_path(@group) %>
+  <%= link_to translate('muck.groups.news'), group_news_index_path(@group) %>
+  <%= link_to translate('muck.groups.events'), group_events_path(@group) %>
+  <%= link_to translate('muck.groups.comments'), group_comments_path(@group) %>
+  <%= link_to translate('muck.groups.activity'), group_activities_path(@group) %>
+  <%= link_to translate('muck.groups.members')  , group_memberships_path(@group) %>
+  <%= link_to translate('muck.groups.forum'), group_forums_path(@group) %>
+  <%= link_to translate('muck.groups.photos'), group_photos_path(@group) %>
+  <%= link_to translate('muck.groups.files'), group_uploads_path(@group) if member? %>
+</div>

@@ -1,0 +1,34 @@
+<script type="text/javascript" language="JavaScript">
+jQuery(document).ready(function()
+{
+  jQuery("#join_button").click(function()
+  {
+    jQuery("#join_group").hide();
+    jQuery.post('<%=group_memberships_path(@group)%>',{ join_button:jQuery(this).val() } ,function(data)
+    {
+    	jQuery("#join").html(data);
+        <% if @group.visibility == Group::PRIVATE && !@group.requires_approval_to_join %>document.location = '<%= group_path(@group) %>';<% end %>
+    });
+    tb_remove();
+    return false; 
+  });
+});
+</script>
+
+<div id="join_group" class="hidden">    
+	<% form_for(:membership, :url => group_memberships_path(@group), :html => { :id => "#{dom_id(@group)}_membership_form", :format => 'js' } ) do |f| %>
+	<div id="thickbox_form">
+    <% if @group.requires_approval_to_join == true %>	
+  		<p><%= translate('muck.groups.membership_in_group_requires_approval', :group_name => h(@group.name)) %></p>
+  		<p><%= translate('muck.groups.membership_request_prompt', :group_name => h(@group.name)) %></p>
+    <% else %>
+  		<p><%= translate('muck.groups.membership_open', :group_name => h(@group.name)) %></p>
+  		<p><%= translate('muck.groups.join_prompt', :group_name => h(@group.name)) %></p>
+    <% end %>
+  	<div class="row button">
+  	  <%= f.submit translate('muck.groups.join'), :class=>"button", :id => "join_button" %>
+  	</div>
+  	<div class="clear"></div>
+  </div>
+  <% end %>
+</div>

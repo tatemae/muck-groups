@@ -1,0 +1,24 @@
+<%= f.error_messages %>
+<%= f.text_field :name, { :label => translate('muck.groups.group_name'),
+  :extra_html => '<div id="group-availibility"></div>' } -%>
+<%= f.text_area :description, { :label => translate('muck.groups.group_description') } -%>
+<%= f.text_field :tag_list, { :label => translate('muck.groups.tag_list'),
+                              :tip => translate('muck.groups.tag_list_tip') } -%>
+<div class="no-float">
+  <div class="form-row">
+    <label for="group_visibility"><%= translate('muck.groups.visiblity') %></label><br/>
+    <%= radio_button 'group', 'visibility', 0 %> <%= translate('muck.groups.invisible') %><br/>
+    <%= radio_button 'group', 'visibility', 1 %> <%= translate('muck.groups.private') %><br/>
+    <%= radio_button 'group', 'visibility', 2 %> <%= translate('muck.groups.public') %><br/>
+  </div>
+
+  <%= f.check_box :requires_approval_to_join, { :label => translate('muck.groups.permissions') } -%>
+
+  <div class="form-row">
+    <label for="group_default_role"><%= translate('muck.groups.default_role') %></label><br/>
+    <%= radio_button 'group', 'default_role', 'member' %> <%= translate('muck.groups.member') %><br/>
+    <%= radio_button 'group', 'default_role', 'observer' %> <%= translate('muck.groups.observer') %>
+  </div>
+
+</div>
+<div class="clear"></div>

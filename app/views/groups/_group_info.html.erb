@@ -1,0 +1,34 @@
+<div id="join">
+	<% if logged_in? -%>
+		<% if @group.is_member?(current_user) -%>
+			<%= render :partial => 'groups/member_controls' -%>
+		<%elsif @group.is_pending_member?(current_user)%>
+			<%= translate('muck.groups.join_request_pending') %>
+		<%else%>
+			<%= render :partial => 'groups/join_controls' -%>
+		<%end%>
+	<% else -%>
+    <%= translate('muck.groups.login_or_join', :login_link => link_to(translate('muck.groups.login'), login_path), :join_link => link_to(translate('muck.groups.signup'), signup_path)) %>
+	<% end -%>
+</div>
+<% if @group.icon -%>
+	<div style="text-align:center"><%= icon @group, :bigger -%></div>
+<% else -%>
+	<% if manager? -%>
+		<div><%= link_to translate('muck.groups.add_group_image'), edit_group_path(@group) %></div>
+	<% end -%>
+<% end -%>
+
+<div id="information" class="activity_box">
+	<h2><%= translate('muck.groups.description') %>
+	<% if manager? -%>
+	  <span class="link-button">
+		  <%= link_to translate('muck.groups.edit_group_settings'), edit_group_path(@group) %>
+		</span>
+		<!-- TODO add ability to manager members <%= link_to translate('muck.groups.manage_members'), edit_group_path(@group) %> -->
+	<% end -%>
+	</h2>
+	<%= sanitize textilize(@group.description) -%>
+</div>
+
+<div class="clear"></div>
