@@ -23,9 +23,10 @@ Add the following to environment.rb
   config.gem "muck-solr", :lib => 'acts_as_solr'
   config.gem "muck-comments", :lib => 'muck_comments'
 
-Be sure that 'from_email_name' is configured in global_config.yml
+==== global_config.yml Entries
 
   from_email_name: 'The guys at my great site'
+  enable_group_activities: true   # enable if you also have muck-activities installed.  This will result in entries like "bob joined the group 'muck is awesome'" being added to the activity feed. 
 
 === Add models
 You will need to create several models in your application to get groups to work.  This allows you to add an desired functionality.

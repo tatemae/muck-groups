@@ -7,28 +7,30 @@ module ActiveRecord
 
       module ClassMethods
 
-        DELETED = -1
-        INVISIBLE = 0
-        PRIVATE = 1
-        PUBLIC = 2
-        
         def acts_as_muck_group(options = {})
-          
+
+          default_options = {
+            :enable_solr => false
+          }
+          options = default_options.merge(options)
+
           include AASM
           
           acts_as_taggable_on :tags
           
           validates_presence_of :creator, :name, :description
           validates_uniqueness_of :name
-          
-          has_many :events, :as => :eventable, :order => 'created_at desc'
-          has_many :comments, :as => :commentable, :order => 'created_at desc'
-          has_many :photos, :as => :photoable, :order => 'created_at desc'
-          has_many :shared_entries, :as => :destination, :order => 'created_at desc', :include => :entry
-          has_many :public_google_docs, :through => :shared_entries, :source => 'entry', :conditions => 'google_doc = true AND public = true', :select => "*"
-          has_many :shared_uploads, :as => :shared_uploadable, :order => 'created_at desc', :include => :upload
-          has_many :uploads, :as => :uploadable, :order => 'created_at desc'
-          has_many :pages, :as => :contentable, :class_name => 'ContentPage', :order => 'created_at desc'
+
+          has_many :uploads, :as => :uploadable, :order => 'created_at desc', :dependent => :destroy
+
+          # TODO figure out if we want to keep these relationships
+#          has_many :events, :as => :eventable, :order => 'created_at desc'
+#          has_many :comments, :as => :commentable, :order => 'created_at desc'
+#          has_many :photos, :as => :photoable, :order => 'created_at desc'
+#          has_many :shared_entries, :as => :destination, :order => 'created_at desc', :include => :entry
+#          has_many :public_google_docs, :through => :shared_entries, :source => 'entry', :conditions => 'google_doc = true AND public = true', :select => "*"
+#          has_many :shared_uploads, :as => :shared_uploadable, :order => 'created_at desc', :include => :upload
+#          has_many :pages, :as => :contentable, :class_name => 'ContentPage', :order => 'created_at desc'
 
           # membership and users
           has_many :membership_requests
@@ -50,8 +52,13 @@ module ActiveRecord
                               end
                             end
 
-          acts_as_solr :fields => [ :content_p, :content_u, :content_a, :visibility ]
+          if options[:enable_solr]
+            require 'acts_as_solr'
+            acts_as_solr({ :fields => [ :content_p => 'string', :content_u => 'string', :content_a => 'string', :visibility => 'integer' ] }, { :multi_core => true, :default_core => 'en' })
+          end
 
+          has_activities if GlobalConfig.enable_group_activities
+          
           has_attached_file :photo, 
                             :styles => { :big => "600x600",
                                          :medium => "300x300>",
@@ -82,6 +89,7 @@ module ActiveRecord
         end
       end
 
+
       # class methods
       module SingletonMethods
   
@@ -106,7 +114,7 @@ module ActiveRecord
         end
 
         def content_p
-          visibility > INVISIBLE ? "#{name} #{description} #{tags.collect{|t| t.name}.join(' ')}" : ''
+          visibility > MuckGroups::INVISIBLE ? "#{name} #{description} #{tags.collect{|t| t.name}.join(' ')}" : ''
         end
 
         def content_u
@@ -126,9 +134,9 @@ module ActiveRecord
         end
 
         def is_content_visible? user
-          return true if self.visibility > Group::PRIVATE 
+          return true if self.visibility > MuckGroups::PRIVATE
           return false if user == :false || user.nil?
-          user.is_admin? || self.is_member?(user)
+          user.admin? || self.is_member?(user)
         end
 
         def notify_approve
@@ -152,6 +160,10 @@ module ActiveRecord
           check_creator(user) || members.in_role(:manager).include?(user)
         end
 
+        def can_upload?(check_user)
+          is_member?(check_user)
+        end
+
         def can_participate?(user)
           return false if user == :false
           user.has_role?('administrator') || !members.find(:all, :conditions => "user_id = #{user.id} AND role != 'banned' AND role != 'observer'").empty?
@@ -170,7 +182,7 @@ module ActiveRecord
         # actually deleting a group could cause some problems so 
         # we cheat and just say we delete it
         def delete!
-          update_attributes(:visibility => DELETED)
+          update_attributes(:visibility => MuckGroups::DELETED)
         end
 
         def to_xml(options = {})

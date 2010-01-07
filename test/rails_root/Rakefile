@@ -13,4 +13,5 @@ require 'muck_engine/tasks'
 require 'muck_users/tasks'
 require 'muck_profiles/tasks'
 require 'muck_groups/tasks'
+require 'muck_activities/tasks'
 

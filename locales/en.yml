@@ -56,3 +56,5 @@ en:
       shared_google_docs: Shared Documents
       from_group: (from {{group_link}})
       membership_open: <b>{{group_name}}</b> is an open group that anyone can join.
+      joined_status: "{{name}} joined {{group}}"
+      left_status: "{{name}} left {{group}}"

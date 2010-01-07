@@ -1,10 +1,10 @@
 class Muck::GroupsController < ApplicationController
 
-  include GroupsHelper
   before_filter :login_required, :except => [:index, :show, :search]
   before_filter :setup, :except => [:index, :search]
   before_filter :authorization_required, :only => [:edit, :update, :destroy]
-  cache_sweeper :groups_sweeper, :only => [:update, :destroy]
+# TODO figure out if we should cache groups and add a sweeper
+#  cache_sweeper :groups_sweeper, :only => [:update, :destroy]
 
   # if a user exists in the request show groups for that user.  If not then show all groups
   def index
@@ -37,7 +37,7 @@ class Muck::GroupsController < ApplicationController
   end
 
   def show
-    if @group && ((@group.visibility > Group::INVISIBLE || @group.is_member?(current_user) || is_admin?))
+    if @group && ((@group.visibility > MuckGroups::INVISIBLE || @group.is_member?(current_user) || is_admin?))
       @user = current_user
       @visible = @group.is_content_visible?(current_user)
       if @visible == true

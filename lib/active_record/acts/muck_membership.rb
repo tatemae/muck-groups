@@ -11,7 +11,9 @@ module ActiveRecord
 
           belongs_to :user
           belongs_to :group, :counter_cache => 'member_count'
-          
+
+          acts_as_activity_source if GlobalConfig.enable_group_activities
+
           include ActiveRecord::Acts::MuckMembership::InstanceMethods
           extend ActiveRecord::Acts::MuckMembership::SingletonMethods
 
@@ -27,15 +29,17 @@ module ActiveRecord
       module InstanceMethods
         
         def after_create
-          feed_to = group.feed_to
-          feed_to = (feed_to | user.feed_to) if group.visibility > Group::INVISIBLE
-          feed_item = FeedItem.create(:item => self, :creator_id => self.user_id)
-          feed_to.each{ |u| u.feed_items << feed_item }
+          if GlobalConfig.enable_group_activities && group.visibility > MuckGroups::INVISIBLE
+            content = I18n.t('muck.groups.joined_status', :name => self.user.display_name, :group => self.group.name)
+            add_activity(group.feed_to, self, self, 'joined_group', '', content)
+          end
         end
 
         def after_destroy
-          feed_item = FeedItem.create(:item => group, :template => 'left_group', :creator_id => user_id)
-          (group.feed_to).each{ |u| u.feed_items << feed_item }
+          if GlobalConfig.enable_group_activities && group.visibility > MuckGroups::INVISIBLE
+            content = I18n.t('muck.groups.left_status', :name => self.user.display_name, :group => self.group.name)
+            add_activity(group.feed_to, self, self, 'left_group', '', content)
+          end
         end
 
         # roles can be defined as symbols.  We want to store them as strings in the database
