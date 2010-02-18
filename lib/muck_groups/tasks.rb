@@ -12,9 +12,9 @@ module MuckGroups
     def define
       
       namespace :muck do
-        namespace :groups do
+        namespace :sync do
           desc "Sync required files from groups."
-          task :sync do
+          task :groups do
             path = File.join(File.dirname(__FILE__), *%w[.. ..])
             system "rsync -ruv #{path}/db ."
           end

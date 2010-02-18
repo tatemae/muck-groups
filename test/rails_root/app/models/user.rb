@@ -4,4 +4,7 @@ class User < ActiveRecord::Base
   end
   acts_as_muck_user
   has_muck_profile
+  has_activities
 end
+
+

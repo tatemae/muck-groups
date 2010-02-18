@@ -33,7 +33,7 @@ class GroupTest < ActiveSupport::TestCase
       assert_difference 'Group.count' do
         group = Factory(:group)
         assert !group.new_record?, "#{group.errors.full_messages.to_sentence}"
-        assert group.current_state == :approved
+        assert group.aasm_state == :approved
       end
     end
 
@@ -48,7 +48,7 @@ class GroupTest < ActiveSupport::TestCase
       assert_difference 'Group.count' do
         group = Factory(:group, :default_role => 'dude')
         assert !group.new_record?, "#{group.errors.full_messages.to_sentence}"
-        assert group.current_state == :approved
+        assert group.aasm_state == :approved
         assert group.default_role == :dude
       end
     end
