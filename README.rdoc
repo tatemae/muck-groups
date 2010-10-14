@@ -17,11 +17,11 @@ Add the following to environment.rb
   config.gem "sanitize"
   config.gem "geokit"
   config.gem "aasm"
-  config.gem 'muck-engine', :lib => 'muck_engine'
+  config.gem 'muck-engine', :lib => 'muck-engine'
   config.gem 'muck-users', :lib => 'muck_users'
   config.gem 'muck-profiles', :lib => 'muck_profiles'
   config.gem "muck-solr", :lib => 'acts_as_solr'
-  config.gem "muck-comments", :lib => 'muck_comments'
+  config.gem "muck-comments", :lib => 'muck-comments'
 
 ==== global_config.yml Entries
 
@@ -32,15 +32,15 @@ Add the following to environment.rb
 You will need to create several models in your application to get groups to work.  This allows you to add an desired functionality.
 
   class Group < ActiveRecord::Base
-    acts_as_muck_group
+    include MuckGroups::Models::MuckGroup
   end
   
   class Membership < ActiveRecord::Base
-    acts_as_muck_membership
+    include MuckGroups::Models::MuckMembership
   end
   
   class MembershipRequest < ActiveRecord::Base
-    acts_as_muck_membership_request
+    include MuckGroups::Models::MuckMembership_request
   end
 
 == Note on Patches/Pull Requests
@@ -56,4 +56,4 @@ You will need to create several models in your application to get groups to work
 
 == Copyright
 
-Copyright (c) 2009 Tatemae. See LICENSE for details.
+Copyright (c) 2009-2010 Tatemae. See LICENSE for details.

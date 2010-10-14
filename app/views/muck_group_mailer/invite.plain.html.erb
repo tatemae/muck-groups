@@ -9,4 +9,4 @@
 <p><%= link_to "View #{h(@inviter.first_name)}'s profile", profile_url(@inviter, :host => GlobalConfig.application_url) %></p>
 
 <p>Kind Regards,</p>
-<p><%= GlobalConfig.from_email_name %></p>
+<p><%= MuckEngine.configuration.from_email_name %></p>

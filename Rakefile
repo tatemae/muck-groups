@@ -13,6 +13,7 @@ begin
     gem.add_development_dependency "shoulda"
     gem.add_dependency "sanitize"
     gem.add_dependency "aasm"
+    gem.add_dependency "paperclip"
     gem.add_dependency "geokit"
     gem.add_dependency "friendly_id"
     gem.add_dependency "muck-engine"
@@ -49,7 +50,7 @@ end
 
 task :test => :check_dependencies
 
-task :default => :test
+task :default => :spec
 
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|

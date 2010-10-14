@@ -1,12 +1,10 @@
 require 'aasm'
 
-ActionController::Base.send :helper, MuckGroupsHelper
-
-ActiveRecord::Base.class_eval { include ActiveRecord::Acts::MuckGroup }
-ActiveRecord::Base.class_eval { include ActiveRecord::Acts::MuckMembership }
-ActiveRecord::Base.class_eval { include ActiveRecord::Acts::MuckMembershipRequest }
-
-I18n.load_path += Dir[ File.join(File.dirname(__FILE__), '..', 'locales', '*.{rb,yml}') ]
+require 'muck-groups/config'
+require 'muck-groups/models/group'
+require 'muck-groups/models/membership'
+require 'muck-groups/models/membership_request'
+require 'muck-groups/engine'
 
 module MuckGroups
   DELETED = -1

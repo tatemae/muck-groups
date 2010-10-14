@@ -16,7 +16,7 @@ jQuery(document).ready(function()
 </script>
 
 <div id="join_group" class="hidden">    
-	<% form_for(:membership, :url => group_memberships_path(@group), :html => { :id => "#{dom_id(@group)}_membership_form", :format => 'js' } ) do |f| %>
+	<%= form_for(:membership, :url => group_memberships_path(@group), :html => { :id => "#{dom_id(@group)}_membership_form", :format => 'js' } ) do |f| %>
 	<div id="thickbox_form">
     <% if @group.requires_approval_to_join == true %>	
   		<p><%= translate('muck.groups.membership_in_group_requires_approval', :group_name => h(@group.name)) %></p>

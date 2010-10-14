@@ -2,8 +2,8 @@
 <span class="link-button" id="invite_group_link"><a href="<%= new_group_invite_path(@group) -%>"><%= translate('Invite Friends') %></a></span>
 <span class="link-button" id="leave_group_link">
 <%# 'Fake the membership id as 1.  We dont need it since we use the current user to get that information' -%>
-<%= link_to_remote translate('muck.groups.leave_group'), :url => group_membership_path(@group, 1),
-	:method => :delete,
+<%= link_to translate('muck.groups.leave_group'), :url => group_membership_path(@group, 1),
+	:class => 'ajax-delete',
 	:update => 'join',
 	:title => translate('muck.groups.leave_group_title'), 
 	:confirm => translate('muck.groups.leave_group_confirm') -%></span>
