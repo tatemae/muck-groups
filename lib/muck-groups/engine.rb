@@ -8,11 +8,11 @@ module MuckGroups
       'muck-groups'
     end
     
-    # initializer 'muck-groups.helpers' do
-    #   ActiveSupport.on_load(:action_view) do
-    #     include MuckGroupsHelper
-    #   end
-    # end
-        
+    initializer 'muck-groups.helpers' do
+      ActiveSupport.on_load(:action_view) do
+        include MuckGroupsHelper
+      end
+    end
+    
   end
 end

@@ -12,10 +12,10 @@ gem "bcrypt-ruby", :require => "bcrypt"
 gem 'muck-engine', :path => "~/projects/muck-engine"
 gem 'muck-users', :path => "~/projects/muck-users"
 gem 'muck-profiles', :path => "~/projects/muck-profiles"
-gem 'muck-activities', :path => "~/projects/muck-activities"
-gem 'muck-groups', :path => '../../'  
+gem 'muck-activities', :path => "~/projects/muck-activities" 
 gem "muck-contents", :path => "~/projects/muck-contents"
 gem "muck-comments", :path => "~/projects/muck-comments"
+gem 'muck-groups', :path => '../../'
   
 if RUBY_VERSION < '1.9'
   gem "ruby-debug"

@@ -60,6 +60,11 @@ MuckComments.configure do |config|
   config.sanitize_content = true            # Turns sanitize off/on for comments. We highly recommend leaving this on.
 end
 
+MuckGroups.configure do |config|
+  config.enable_solr = true               # Turn on solr for searching groups.
+  config.enable_group_activities = true   # Enable if you also have muck-activities installed.  This will result in entries like "bob joined the group 'muck is awesome'" being added to the activity feed. 
+end
+
 if defined?(ActiveRecord)
   # Don't Include Active Record class name as root for JSON serialized output.
   ActiveRecord::Base.include_root_in_json = false
