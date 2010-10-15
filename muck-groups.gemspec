@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Justin Ball", "Joel Duffin"]
-  s.date = %q{2010-10-13}
+  s.date = %q{2010-10-14}
   s.description = %q{Groups are an assembly of people}
   s.email = %q{justin@tatemae.com}
   s.extra_rdoc_files = [
@@ -684,6 +684,7 @@ Gem::Specification.new do |s|
      "test/rails_test/config/environments/test.rb",
      "test/rails_test/config/initializers/backtrace_silencers.rb",
      "test/rails_test/config/initializers/inflections.rb",
+     "test/rails_test/config/initializers/mce_options.rb",
      "test/rails_test/config/initializers/mime_types.rb",
      "test/rails_test/config/initializers/muck.rb",
      "test/rails_test/config/initializers/secret_token.rb",
@@ -696,13 +697,22 @@ Gem::Specification.new do |s|
      "test/rails_test/db/migrate/20090426041056_create_countries.rb",
      "test/rails_test/db/migrate/20090426041103_create_states.rb",
      "test/rails_test/db/migrate/20090512013727_create_profiles.rb",
+     "test/rails_test/db/migrate/20090517040220_create_uploads.rb",
+     "test/rails_test/db/migrate/20090613173314_create_comments.rb",
+     "test/rails_test/db/migrate/20090703055724_add_contents.rb",
      "test/rails_test/db/migrate/20090721213052_acts_as_taggable_on_migration.rb",
      "test/rails_test/db/migrate/20090730044139_add_comment_cache.rb",
+     "test/rails_test/db/migrate/20090730154102_allow_null_user.rb",
+     "test/rails_test/db/migrate/20090806230610_add_layout_to_contents.rb",
+     "test/rails_test/db/migrate/20090808175401_add_contents_comment_counter_cache.rb",
      "test/rails_test/db/migrate/20090818204527_add_activity_indexes.rb",
      "test/rails_test/db/migrate/20090819030523_add_attachable_to_activities.rb",
      "test/rails_test/db/migrate/20091112160332_create_groups.rb",
      "test/rails_test/db/migrate/20091124203137_add_location_to_profiles.rb",
      "test/rails_test/db/migrate/20091124205819_add_fields_to_profiles.rb",
+     "test/rails_test/db/migrate/20100123035450_create_access_codes.rb",
+     "test/rails_test/db/migrate/20100123233654_create_access_code_requests.rb",
+     "test/rails_test/db/migrate/20100206000906_remove_name_fields.rb",
      "test/rails_test/features/step_definitions/comment_steps.rb",
      "test/rails_test/features/step_definitions/common_steps.rb",
      "test/rails_test/features/step_definitions/web_steps.rb",
@@ -710,6 +720,7 @@ Gem::Specification.new do |s|
      "test/rails_test/features/support/custom_env.rb",
      "test/rails_test/features/support/env.rb",
      "test/rails_test/features/support/paths.rb",
+     "test/rails_test/lib/daemons/amazonaws.rb",
      "test/rails_test/public/dispatch.rb",
      "test/rails_test/spec/controllers/group_controller_spec.rb",
      "test/rails_test/spec/controllers/memberships_controller_spec.rb",

@@ -50,7 +50,7 @@ module MuckGroups
           acts_as_solr({ :fields => [ :content_p => 'string', :content_u => 'string', :content_a => 'string', :visibility => 'integer' ] }, { :multi_core => true, :default_core => 'en' })
         end
 
-        include ::MuckActivities::Models::MuckActivityConsumer if MuckActivities.configuration.enable_group_activities
+        include ::MuckActivities::Models::MuckActivityConsumer if MuckGroups.configuration.enable_group_activities
         
         has_attached_file :photo, 
                           :styles => { :big => "600x600",
@@ -60,8 +60,8 @@ module MuckGroups
                                        :tiny => "24x24>" },
                           :default_url => "/images/group_default.jpg"
 
-        scope :visible where("visibility > 0")
-        scope :by_name order("name ASC")
+        scope :visible, where("visibility > 0")
+        scope :by_name, order("name ASC")
 
         aasm_initial_state :approved
         

@@ -1,5 +1,13 @@
 require 'rubygems'
 require 'rake'
+require 'rspec/core/rake_task'
+
+desc 'Default: run specs.'
+task :default => :spec
+RSpec::Core::RakeTask.new(:spec) do |t|
+  t.rspec_opts = ["--color", "-c", "-f progress", "-r test/rails_test/spec/spec_helper.rb"]
+  t.pattern = 'test/rails_test/spec/**/*_spec.rb'  
+end
 
 begin
   require 'jeweler'
@@ -49,8 +57,6 @@ rescue LoadError
 end
 
 task :test => :check_dependencies
-
-task :default => :spec
 
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|

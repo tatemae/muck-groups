@@ -9,18 +9,18 @@ module MuckGroups
         belongs_to :user
         belongs_to :group, :counter_cache => 'member_count'
 
-        include ::MuckActivities::Models::MuckActivitySource if MuckActivities.configuration.enable_group_activities
+        include ::MuckActivities::Models::MuckActivitySource if MuckGroups.configuration.enable_group_activities
       end
 
       def after_create
-        if MuckActivities.configuration.enable_group_activities && group.visibility > MuckGroups::INVISIBLE
+        if MuckGroups.configuration.enable_group_activities && group.visibility > MuckGroups::INVISIBLE
           content = I18n.t('muck.groups.joined_status', :name => self.user.display_name, :group => self.group.name)
           add_activity(group.feed_to, self, self, 'joined_group', '', content)
         end
       end
 
       def after_destroy
-        if MuckActivities.configuration.enable_group_activities && group.visibility > MuckGroups::INVISIBLE
+        if MuckGroups.configuration.enable_group_activities && group.visibility > MuckGroups::INVISIBLE
           content = I18n.t('muck.groups.left_status', :name => self.user.display_name, :group => self.group.name)
           add_activity(group.feed_to, self, self, 'left_group', '', content)
         end

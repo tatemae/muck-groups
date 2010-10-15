@@ -2,31 +2,25 @@
 Add groups to your muck powered site
 
 == Installation
-  sudo gem install muck-groups
 
 === Add configuration
 
-Add the following to environment.rb
-  config.gem "authlogic"
-  config.gem "searchlogic"
-  config.gem "will_paginate"
-  config.gem "bcrypt-ruby", :lib => "bcrypt"
-  config.gem "paperclip"
-  config.gem "acts-as-taggable-on"
-  config.gem "awesome_nested_set"
-  config.gem "sanitize"
-  config.gem "geokit"
-  config.gem "aasm"
-  config.gem 'muck-engine', :lib => 'muck-engine'
-  config.gem 'muck-users', :lib => 'muck_users'
-  config.gem 'muck-profiles', :lib => 'muck_profiles'
-  config.gem "muck-solr", :lib => 'acts_as_solr'
-  config.gem "muck-comments", :lib => 'muck-comments'
+Add the following to your gemfile
+  gem "authlogic"
+  gem "bcrypt-ruby", :lib => "bcrypt"
+  gem "acts-as-taggable-on"
+  gem 'muck-engine'
+  gem 'muck-users'
+  gem 'muck-profiles'
+  gem "muck-solr"
+  gem "muck-comments"
 
-==== global_config.yml Entries
+==== Initializer
+If you are also using MuckActivities then you can show group activity:
 
-  from_email_name: 'The guys at my great site'
-  enable_group_activities: true   # enable if you also have muck-activities installed.  This will result in entries like "bob joined the group 'muck is awesome'" being added to the activity feed. 
+  MuckGroups.configure do |config|
+    config.enable_group_activities: true   # enable if you also have muck-activities installed.  This will result in entries like "bob joined the group 'muck is awesome'" being added to the activity feed. 
+  end
 
 === Add models
 You will need to create several models in your application to get groups to work.  This allows you to add an desired functionality.
