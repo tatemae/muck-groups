@@ -64,9 +64,13 @@ describe Muck::GroupsController do
         @group = groups(:invisible)
       end
 
-      should_deny_group_admin_actions(:africa)
-      should_deny_group_admin_actions(:invisible)
-
+      describe "admin actions" do
+        it "denies access" do
+          should_deny_group_admin_actions(:africa)
+          should_deny_group_admin_actions(:invisible)
+        end
+      end
+      
       describe "view invisible group" do
         before do
           get :show, :id => @group.to_param
@@ -82,8 +86,12 @@ describe Muck::GroupsController do
         @group = groups(:africa)
       end        
 
-      should_deny_group_admin_actions(:africa)
-      should_deny_group_admin_actions(:invisible)
+      describe "admin actions" do
+        it "denies access" do
+          should_deny_group_admin_actions(:africa)
+          should_deny_group_admin_actions(:invisible)
+        end
+      end
 
       describe "view invisible group" do
         before do
@@ -102,13 +110,6 @@ describe Muck::GroupsController do
         @admin_user = users(:admin)
         login_as @admin_user
       end        
-
-      should_be_restful do |resource|
-        resource.actions    = [:index, :show, :edit, :update]
-        resource.formats    = [:html]
-        resource.create.params = { :name => "a random new group", :description => 'this is the random group', :default_role => 'member'}
-        resource.update.params = { :name => "Changed", :description => 'this is the changed, random group' }    
-      end
 
       describe "show the group" do
         before do

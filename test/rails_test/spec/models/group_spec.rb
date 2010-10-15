@@ -120,15 +120,15 @@ describe Group do
     end
 
     it "should be visible to invalid user" do
-      @group.is_content_visib.should be_e(false)
+      @group.is_content_visible?(false).should be_false
     end
   
     it "should be visible to nil user" do
-      @group.is_content_visib.should be_e(nil)
+      @group.is_content_visible?(nil).should be_false
     end
   
     it "should be visible to valid user" do
-      @group.is_content_visib.should be_e(@user)
+      @group.is_content_visible?(@user).should be_true
     end
   end
   
@@ -140,15 +140,15 @@ describe Group do
     end
 
     it "should be invisible but visible to a member" do
-      @invisible_group.is_content_visib.should be_e(@member)
+      @invisible_group.is_content_visible?(@member).should be_true
     end
 
     it "should not be visible to nil user" do
-      @invisible_group.is_content_visib.should_not be_e(nil)
+      @invisible_group.is_content_visible?(nil).should be_false
     end
       
     it "should not be visible to invalid user" do
-      @invisible_group.is_content_visib.should_not be_e(false)
+      @invisible_group.is_content_visible?(false).should be_false
     end
     
   end

@@ -10,11 +10,14 @@ describe GroupsMailer do
   
   it "should send invite email" do
     inviter = Factory(:user)
-    invited = Factory(:user)
+    email = 'asdf@example.com'
+    name = 'asdf'
+    subject = "Invitation"
+    message = "Come join our group"
     email = GroupsMailer.invite(inviter, group, email, name, subject, message).deliver
     ActionMailer::Base.deliveries.should_not be_empty
     email.to.should == [email]
     email.from.should == [MuckEngine.configuration.from_email]
   end
   
-end  
+end 
