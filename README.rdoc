@@ -1,6 +1,8 @@
 = muck-groups
 Add groups to your muck powered site
 
+Note this gem is not complete. Please feel free to fork it.
+
 == Installation
 
 === Add configuration
