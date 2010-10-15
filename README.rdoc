@@ -19,7 +19,8 @@ Add the following to your gemfile
 If you are also using MuckActivities then you can show group activity:
 
   MuckGroups.configure do |config|
-    config.enable_group_activities: true   # enable if you also have muck-activities installed.  This will result in entries like "bob joined the group 'muck is awesome'" being added to the activity feed. 
+    config.enable_solr = true               # Turn on solr for searching groups.
+    config.enable_group_activities = true   # Enable if you also have muck-activities installed.  This will result in entries like "bob joined the group 'muck is awesome'" being added to the activity feed. 
   end
 
 === Add models

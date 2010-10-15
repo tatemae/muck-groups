@@ -8,11 +8,13 @@ RSpec::Core::RakeTask.new(:spec) do |t|
   t.rspec_opts = ["--color", "-c", "-f progress", "-r test/rails_test/spec/spec_helper.rb"]
   t.pattern = 'test/rails_test/spec/**/*_spec.rb'  
 end
+task :spec => :check_dependencies
 
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "muck-groups"
+    gem.rubyforge_project = 'muck-groups'
     gem.summary = %Q{Groups for muck}
     gem.description = %Q{Groups are an assembly of people}
     gem.email = "justin@tatemae.com"
@@ -36,13 +38,6 @@ rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
 end
 
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/*_test.rb'
-  test.verbose = true
-end
-
 begin
   require 'rcov/rcovtask'
   Rcov::RcovTask.new do |test|
@@ -55,8 +50,6 @@ rescue LoadError
     abort "RCov is not available. In order to run rcov, you must: sudo gem install spicycode-rcov"
   end
 end
-
-task :test => :check_dependencies
 
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|

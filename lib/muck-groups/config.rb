@@ -12,10 +12,11 @@ module MuckGroups
 
   class Configuration
     attr_accessor :enable_solr
-
+    attr_accessor :enable_group_activities
     
     def initialize
       self.enable_solr = true
+      self.enable_group_activities = true
     end
     
   end

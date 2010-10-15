@@ -15,36 +15,6 @@ describe Muck::GroupsController do
     it { should require_login :update, :put }
     it { should require_login :destroy, :delete }
     
-    def self.should_deny_group_admin_actions(name)
-
-      describe "deny access to admin actions" do
-
-        before do
-          @group_to_test = self.instance_variable_get("@#{name.to_s}")
-        end
-
-        it "should now allow edit" do
-          get :edit, :id => @group_to_test.to_param
-          should redirect_to group_url(@group_to_test)
-          ensure_flash(PERMISSION_DENIED_MSG)
-        end
-
-        it "should not allow update" do
-          put :update, :id => @group_to_test.to_param
-          should redirect_to group_url(@group_to_test)
-          ensure_flash(PERMISSION_DENIED_MSG)
-        end
-
-        it "should not allow destroy" do
-          delete :destroy, :id => @group_to_test.to_param
-          should redirect_to group_url(@group_to_test)
-          ensure_flash(PERMISSION_DENIED_MSG)
-        end
-
-      end
-
-    end
-
     describe "not logged in" do
 
       describe "view normal group" do
@@ -190,4 +160,34 @@ describe Muck::GroupsController do
 
   end
   
+end
+
+def should_deny_group_admin_actions(name)
+
+  describe "deny access to admin actions" do
+
+    before do
+      @group_to_test = self.instance_variable_get("@#{name.to_s}")
+    end
+
+    it "should now allow edit" do
+      get :edit, :id => @group_to_test.to_param
+      should redirect_to group_url(@group_to_test)
+      ensure_flash(PERMISSION_DENIED_MSG)
+    end
+
+    it "should not allow update" do
+      put :update, :id => @group_to_test.to_param
+      should redirect_to group_url(@group_to_test)
+      ensure_flash(PERMISSION_DENIED_MSG)
+    end
+
+    it "should not allow destroy" do
+      delete :destroy, :id => @group_to_test.to_param
+      should redirect_to group_url(@group_to_test)
+      ensure_flash(PERMISSION_DENIED_MSG)
+    end
+
+  end
+
 end

@@ -1,6 +1,7 @@
 require 'aasm'
 
 require 'muck-groups/config'
+require 'muck-groups/lib/group_methods'
 require 'muck-groups/models/group'
 require 'muck-groups/models/membership'
 require 'muck-groups/models/membership_request'

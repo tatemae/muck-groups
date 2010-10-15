@@ -2,10 +2,7 @@ require File.dirname(__FILE__) + '/../../spec_helper'
 
 describe Groups::MembershipsController do
 
-  def setup
-    @controller = Groups::MembershipsController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
+  before do
     @group      = Factory(:group)
     @membership = Factory(:membership, :group => @group)
   end

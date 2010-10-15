@@ -1,3 +1,3 @@
 class MembershipRequest < ActiveRecord::Base
-  include MuckGroups::Models::MuckMembership_request
+  include MuckGroups::Models::MuckMembershipRequest
 end

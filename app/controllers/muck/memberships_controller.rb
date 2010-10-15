@@ -1,7 +1,7 @@
-class Groups::MembershipsController < ApplicationController
+class Muck::MembershipsController < ApplicationController
 
-  include GroupMethods
-  include GroupsHelper
+  include ::MuckGroups::GroupMethods
+
   before_filter :get_group
   before_filter :setup
   before_filter :login_required, :except => [:index]
@@ -115,13 +115,15 @@ class Groups::MembershipsController < ApplicationController
 
   private
 
-  def setup
-    if !@group
-      flash[:notice] = _("There was a problem with the group.  Please try again.")
-      permission_denied
-    else
-      @can_participate = @group.can_participate?(current_user)
+    def setup
+      if !@group
+        flash[:notice] = _("There was a problem with the group.  Please try again.")
+        permission_denied
+      else
+        @can_participate = @group.can_participate?(current_user)
+      end
     end
-  end
+    
 
+    
 end
