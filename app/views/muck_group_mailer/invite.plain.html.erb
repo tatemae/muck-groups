@@ -2,11 +2,11 @@
 
 <p><%= h(@message) %></p>
 
-<p>Visit the group '<%= link_to h(@group.name), group_url(@group, :host => GlobalConfig.application_url) %>'</p>
+<p>Visit the group '<%= link_to h(@group.name), group_url(@group, :host => MuckEngine.configuration.application_url) %>'</p>
 
-<p>Join the group '<%= link_to h(@group.name), new_group_membership_url(@group, :host => GlobalConfig.application_url)%>'</p>
+<p>Join the group '<%= link_to h(@group.name), new_group_membership_url(@group, :host => MuckEngine.configuration.application_url)%>'</p>
 
-<p><%= link_to "View #{h(@inviter.first_name)}'s profile", profile_url(@inviter, :host => GlobalConfig.application_url) %></p>
+<p><%= link_to "View #{h(@inviter.first_name)}'s profile", profile_url(@inviter, :host => MuckEngine.configuration.application_url) %></p>
 
 <p>Kind Regards,</p>
 <p><%= MuckEngine.configuration.from_email_name %></p>
