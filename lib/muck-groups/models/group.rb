@@ -49,6 +49,16 @@ module MuckGroups
           require 'acts_as_solr'
           acts_as_solr({ :fields => [ :content_p => 'string', :content_u => 'string', :content_a => 'string', :visibility => 'integer' ] }, { :multi_core => true, :default_core => 'en' })
         end
+        
+        if MuckGroups.configuration.enable_sunspot
+          require 'sunspot'
+          searchable do
+            text :content_p
+            text :content_u 
+            text :content_a
+            integer :visibility
+          end
+        end
 
         include ::MuckActivities::Models::MuckActivityConsumer if MuckGroups.configuration.enable_group_activities
         

@@ -61,6 +61,7 @@ MuckComments.configure do |config|
 end
 
 MuckGroups.configure do |config|
+  config.enable_sunspot = false           # This enables or disables sunspot for groups. Only use acts_as_solr or sunspot not both. Sunspot does not include multicore support.
   config.enable_solr = true               # Turn on solr for searching groups.
   config.enable_group_activities = true   # Enable if you also have muck-activities installed.  This will result in entries like "bob joined the group 'muck is awesome'" being added to the activity feed. 
 end

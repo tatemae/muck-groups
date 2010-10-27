@@ -58,3 +58,4 @@ en:
       membership_open: <b>%{group_name}</b> is an open group that anyone can join.
       joined_status: "%{name}} joined %{group}"
       left_status: "%{name}} left %{group}"
+      search_not_enabled: "Search not enabled for groups. Set either enable_solr or enable_sunspot to true in your group configuration." 

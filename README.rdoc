@@ -15,6 +15,7 @@ Add the following to your gemfile
   gem 'muck-users'
   gem 'muck-profiles'
   gem "muck-solr"
+  # gem 'sunspot' # You can choose to use sunspot instead of solr if you want.
   gem "muck-comments"
 
 ==== Initializer

@@ -27,8 +27,17 @@ class Muck::GroupsController < ApplicationController
     if (@query.nil? or @query == '*')
       redirect_to '/groups'#
       return
-    end 
-    @groups = Group.find_by_solr("#{search_field}:(#{@query})", :offset => (@page-1)*@per_page, :limit => @per_page).results
+    end
+    if MuckGroups.configuration.enable_solr
+      @groups = Group.find_by_solr("#{search_field}:(#{@query})", :offset => (@page-1)*@per_page, :limit => @per_page).results
+    elsif MuckGroups.configuration.enable_sunspot
+      @groups = Sunspot.search Group do
+        keywords @query
+        paginate :page => @page, :per_page => @per_page
+      end.results
+    else
+      raise translate('muck.groups.search_not_enabled')
+    end
     flash[:notice] = @groups.empty? ? t('muck.groups.no_matching_groups_found') : nil
     respond_to do |format|
       format.html { render :template => 'groups/index'}
