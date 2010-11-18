@@ -5,8 +5,8 @@ require 'rspec/core/rake_task'
 desc 'Default: run specs.'
 task :default => :spec
 RSpec::Core::RakeTask.new(:spec) do |t|
-  t.rspec_opts = ["--color", "-c", "-f progress", "-r test/rails_test/spec/spec_helper.rb"]
-  t.pattern = 'test/rails_test/spec/**/*_spec.rb'  
+  t.rspec_opts = ["--color", "-c", "-f progress", "-r test/spec/spec_helper.rb"]
+  t.pattern = 'test/spec/**/*_spec.rb'  
 end
 task :spec => :check_dependencies
 
@@ -14,7 +14,7 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "muck-groups"
-    gem.rubyforge_project = 'muck-groups'
+    
     gem.summary = %Q{Groups for muck}
     gem.description = %Q{Groups are an assembly of people}
     gem.email = "justin@tatemae.com"
@@ -31,6 +31,8 @@ begin
     gem.add_dependency "muck-profiles"
     gem.add_dependency "muck-comments"
     gem.add_dependency "muck-solr"
+    gem.files.exclude 'test/**'
+    gem.test_files.exclude 'test/**'
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
@@ -42,7 +44,7 @@ begin
   require 'rcov/rcovtask'
   Rcov::RcovTask.new do |test|
     test.libs << 'test'
-    test.pattern = 'test/**/*_test.rb'
+    test.pattern = 'test/test/**/*_spec.rb'
     test.verbose = true
   end
 rescue LoadError
